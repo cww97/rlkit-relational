@@ -6,3 +6,7 @@ relationalrl_venv/
 rlkit/launchers/config.py
 examples/relationalrl/pkls/
 *.pyc
+.vscode/
+MUJOCO_LOG.TXT
+__pycache__/
+.git/

@@ -28,7 +28,6 @@ glfw==1.7.0
 graphviz==0.12
 gtimer==1.0.0b5
 gym==0.10.9
-h5py==2.9.0
 idna==2.8
 imageio==2.4.1
 ipdb==0.12
@@ -44,8 +43,6 @@ kiwisolver==1.0.1
 lockfile==0.12.2
 matplotlib==3.0.2
 more-itertools==5.0.0
-mpi4py==3.0.1
-mujoco-py==1.50.1.68
 numpy==1.16.0
 numpy-stl==2.10.0
 opencv-python==4.0.0.21
@@ -54,7 +51,6 @@ parso==0.4.0
 pexpect==4.7.0
 pickleshare==0.7.5
 Pillow==5.4.1
-pkg-resources==0.0.0
 pluggy==0.8.1
 prompt-toolkit==2.0.9
 psutil==5.5.0
@@ -79,7 +75,6 @@ requests==2.21.0
 rsa==3.4.2
 s3transfer==0.1.13
 scikit-video==1.1.11
-scipy==1.2.0
 seaborn==0.9.0
 six==1.12.0
 smmap2==2.0.5
@@ -92,3 +87,8 @@ tornado==6.0.2
 traitlets==4.3.2
 urllib3==1.24.1
 wcwidth==0.1.7
+
+mpi4py
+mujoco-py
+h5py
+scipy

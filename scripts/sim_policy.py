@@ -11,11 +11,12 @@ filename = str(uuid.uuid4())
 
 def simulate_policy(args):
     data = joblib.load(args.file)
-    policy = data['policy']
+    import ipdb; ipdb.set_trace()
+    policy = data['exploration_policy']  # ? TODO, eval ?
     env = data['env']
     print("Policy loaded")
     if args.gpu:
-        set_gpu_mode(True)
+        set_gpu_mode("gpu")
         policy.cuda()
     if isinstance(policy, PyTorchModule):
         policy.train(False)
@@ -34,7 +35,7 @@ def simulate_policy(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('file', type=str,
-                        help='path to the snapshot file')
+                        help='path topdb the snapshot file')
     parser.add_argument('--H', type=int, default=300,
                         help='Max length of rollout')
     parser.add_argument('--gpu', action='store_true')

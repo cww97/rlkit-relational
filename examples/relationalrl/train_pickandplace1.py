@@ -16,10 +16,13 @@ from rlkit.torch.data_management.normalizer import CompositeNormalizer
 from rlkit.torch.optim.mpi_adam import MpiAdam
 from rlkit.launchers.launcher_util import run_experiment
 from rlkit.torch.relational.networks import *
+from rlkit.torch.relational.networks import GraphPropagation, QValueReNN, ValueReNN, PolicyReNN
 import torch.nn.functional as F
 from rlkit.torch.relational.modules import *
+from rlkit.torch.relational.modules import AttentiveGraphPooling
 from torch.nn import Parameter
 from rlkit.launchers.config import get_infra_settings
+from rlkit.torch.sac.policies import FlattenTanhGaussianPolicy
 
 
 def experiment(variant):
@@ -224,13 +227,12 @@ if __name__ == "__main__":
     mlp_hidden_sizes=[64, 64, 64]
     stackonly = False
 
-    mode = "ec2"
+    mode = "here_no_doodad"
 
     instance_type = "c5.18xlarge"
-    ec2_settings = get_infra_settings(mode, instance_type)
-    num_gpus = ec2_settings['num_gpus']
-    num_parallel_processes = ec2_settings['num_parallel_processes']
-    gpu_mode = ec2_settings['gpu_mode']
+    num_gpus = 1
+    num_parallel_processes = 16
+    gpu_mode = "gpu_opt"
 
     recurrent_graph=False
 

@@ -14,6 +14,7 @@ from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 from rlkit.torch.pytorch_util import shuffle_and_mask
 from rlkit.torch.networks import Mlp
 from rlkit.torch.relational.modules import *
+from rlkit.torch.relational.modules import AttentiveGraphToGraph, FetchInputPreprocessing
 
 
 class GraphPropagation(PyTorchModule):
@@ -193,9 +194,27 @@ class PolicyReNN(PyTorchModule, ExplorationPolicy):
         selected_objects = selected_objects.squeeze(1)
         return self.mlp(selected_objects, **mlp_kwargs)
 
+    def _get_action_and_info(self, observation, **kwargs):
+        """
+        Get an action to take in the environment.
+        :param observation:
+        :return:
+        """
+        new_obs = np.hstack((
+            observation['observation'],
+            observation['desired_goal'],
+        ))
+        kwargs = dict()
+        # env.unwrapped.num_blocks
+        mask = np.ones((1, 1)) # Num_blocks is the MAX num_blocks
+        kwargs['mask'] = mask
+        return self.get_action(new_obs, **kwargs)
+
     def get_action(self,
                    obs_np,
                    **kwargs):
+        if type(obs_np)==dict:
+            return self._get_action_and_info(obs_np, **kwargs)
         assert len(obs_np.shape) == 1
         actions, agent_info = self.get_actions(obs_np[None], **kwargs)
         assert isinstance(actions, np.ndarray)
